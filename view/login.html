@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/login.css">
+    <script src="/script/login/login.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <form>
+    <form action="/view/home.html">
         <h2>Login Elite</h2>
-        <label> <p>E-mail:</p> <input type="text" id="email"/></label>
+        <label> <p>E-mail:</p> <input type="text" id="email" required/></label>
 
-        <label> <p>Senha:</p> <input type="password" id="password"/></label>
+        <label> <p>Senha:</p> 
+            <div style="position: relative; width: 100%;">
+                <input type="password" id="password" required />
+                <span id="togglePassword" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;">👁️</span>
+            </div>
+        </label>
 
-        <button>Entrar</button>
+        <input type="submit" value="Entrar">
 
         <div class="google-login">
             <a class="teste" href="#">Entrar com Google</a>

@@ -1,4 +1,7 @@
 const API_URL = "http://localhost:3001/produtos_loja/";
+const token = sessionStorage.getItem('token');
+
+
 
 async function listar(nomes = [], categoria = null) {
     const dadosUsuario = {
@@ -7,26 +10,54 @@ async function listar(nomes = [], categoria = null) {
     };
 
     try {
-        const response = await fetch(API_URL + "listar/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dadosUsuario),
-        });
+        let response = undefined;
+        if(token){
+            response = await fetch(API_URL + "listar/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": "Bearer "+token
+                },
+                body: JSON.stringify(dadosUsuario),
+            });
+        }
+        else{
+            response = await fetch(API_URL + "listar/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dadosUsuario),
+            });
+            
+        }
+        
         const respostaJson = await response.json();
-        console.log(respostaJson)
 
         const mensagem = respostaJson.message;
 
         if (response.status !== 200) {
             return [null, mensagem];
         }
-        
+        console.log(respostaJson)
         return [respostaJson, mensagem];
     } catch (error) {
         console.error("Erro na requisição:", error);
         return [null, "Erro na requisição"];
+    }
+}
+
+const trocarBotoes = function(){
+    if(token){
+        const elemento = document.getElementById('elite-button');
+        elemento.remove();
+        const elemento2 = document.getElementById('elite-button2');
+        elemento2.remove();
+    }
+    else{
+        
+        const elemento = document.getElementById('encerrarSessao');
+        elemento.remove();
     }
 }
 
@@ -51,7 +82,8 @@ const getCarregar = function(produtos){
         img.setAttribute('src', produto_loja.produto.img)
         img.setAttribute('alt', produto_loja.produto.nome_produto)
         img.setAttribute('title', produto_loja.produto.nome_produto)
-        link.setAttribute('href', '/produtoloja/'+produto_loja.id_produto_loja)
+        link.setAttribute('href', `/view/productNotRegister.html?id_produto_loja=${produto_loja.produto.id_produto}`);
+
         div_estrelas.innerHTML = `
             <i class="fa-solid fa-star"></i>
             <i class="fa-solid fa-star"></i>
@@ -76,7 +108,18 @@ const getCarregar = function(produtos){
 }
 
 window.addEventListener('load', async function() {
-  let dados = await listar();
-  getCarregar(dados[0].produtos_loja)
+    
+    let dados = await listar();
+    trocarBotoes()
+    getCarregar(dados[0].produtos_loja)
+    const form = document.getElementById('encerrarSessao');
+    if(form){
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault(); // Evita o envio padrão do formulário
+            sessionStorage.clear();
+            form.submit();
+        });
+    }
+    
   // Aqui você pode fazer algo com os dados recebidos, se necessário
 });

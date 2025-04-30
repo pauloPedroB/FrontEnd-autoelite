@@ -6,6 +6,7 @@
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="/style/productNotRegister.css">
     <script src="/script/index.js"></script>
+    <script src="/script/Vizualizar Produto/produto.js"></script>
 </head>
 <body>
     <header>
@@ -27,18 +28,16 @@
                     <path d="M49.5828 41.1576L41.031 32.6057L34.4531 29.8881C36.6434 26.7735 37.8168 23.0577 37.8125 19.25C37.8125 9.0146 29.4854 0.6875 19.25 0.6875C9.0146 0.6875 0.6875 9.0146 0.6875 19.25C0.6875 29.4854 9.0146 37.8125 19.25 37.8125C23.0908 37.8169 26.8373 36.6232 29.9676 34.3977L32.6782 40.9579L41.2297 49.5102C41.7781 50.0586 42.4292 50.4937 43.1458 50.7905C43.8624 51.0874 44.6304 51.2402 45.4061 51.2402C46.1817 51.2402 46.9497 51.0875 47.6663 50.7907C48.3829 50.4939 49.0341 50.0589 49.5826 49.5104C50.131 48.962 50.5661 48.3109 50.863 47.5943C51.1598 46.8777 51.3126 46.1097 51.3126 45.334C51.3126 44.5584 51.1599 43.7904 50.8631 43.0738C50.5663 42.3571 50.1313 41.706 49.5828 41.1576ZM4.0625 19.25C4.0625 10.8758 10.8758 4.0625 19.25 4.0625C27.6242 4.0625 34.4375 10.8758 34.4375 19.25C34.4375 27.6242 27.6242 34.4375 19.25 34.4375C10.8758 34.4375 4.0625 27.6242 4.0625 19.25ZM47.1962 47.1237C46.7211 47.5977 46.0773 47.8638 45.4063 47.8638C44.7352 47.8638 44.0915 47.5977 43.6163 47.1237L35.5404 39.0478L33.0203 32.948L39.1203 35.468L47.1964 43.544C47.6703 44.0191 47.9364 44.6628 47.9363 45.3339C47.9363 46.005 47.6701 46.6486 47.1962 47.1237Z" fill="white"/>
                     </svg>
             </div>
-            <p class="title-product-main">Volante Mercedes Mb 430mm Pequeno 608 710 1620 1935</p>
+            <p class="title-product-main" id="title-product-main"></p>
             <div class="box-product-main">
-                <div class="box-imgs">
-                    <img src="/img/productNotRegisterImg/product01.png" alt="">
-                    <img src="/img/productNotRegisterImg/product01.png" alt="">
-                    <img src="/img/productNotRegisterImg/product01.png" alt="">
-                    <img src="/img/productNotRegisterImg/product01.png" alt="">
+                <div class="box-imgs" id="box-imgs">
+                    
                 </div>
-                <p>Este produto está a 3.2 KM de você!</p>
-                <div class="box-learnMore">
-                    <span>Saber mais...</span>
-                </div>
+                <p>Descubra onde encontrar este produto na loja mais próxima de você!</p>
+                <form action="/view/login.html">
+                    <input type="submit" value="Saber mais..." class="box-learnMore">
+                </form>
+                
             </div>
         </section>
 
