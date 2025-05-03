@@ -15,12 +15,12 @@ export function buscarUsuario() {
                 return null;
             }
             const usuario = dados.usuario;
+
             if(usuario.verificado == null){
                 window.location.href = "/view/verificEmail.html";
                 return null;
             }
-            return dados;
-
+            return usuario;
         }
         else{
             alert("Faça Login para acessar o sistema")

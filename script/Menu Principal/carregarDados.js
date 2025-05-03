@@ -47,8 +47,12 @@ async function listar(nomes = [], categoria = null) {
     }
 }
 
-const trocarBotoes = function(){
+const gerenciarBotoes = function(){
     if(token){
+        //const itens = document.querySelectorAll('.decoration-text');
+        //for (let i = 0; i < itens.length; i++) {
+          //  itens[i].remove();
+          //}
         const elemento = document.getElementById('elite-button');
         elemento.remove();
         const elemento2 = document.getElementById('elite-button2');
@@ -71,6 +75,7 @@ const getCarregar = function(produtos){
         let h2_caixa_produto = document.createElement('h3')
         let img = document.createElement('img')
         let link = document.createElement('a')
+        let distancia = document.createElement('p')
         let div_estrelas = document.createElement('div')
 
         
@@ -96,11 +101,12 @@ const getCarregar = function(produtos){
         div_caixa_produto.appendChild(link)
         link.appendChild(h2_caixa_produto)
         link.appendChild(img)
+        link.appendChild(distancia)
         link.appendChild(div_estrelas)
 
 
 
-
+        distancia.innerText = 'Distancia: '+produto_loja.distancia + 'KM';
         h2_caixa_produto.innerText = produto_loja.produto.nome_produto.substring(0, 30)+"...";
 
     }
@@ -108,9 +114,25 @@ const getCarregar = function(produtos){
 }
 
 window.addEventListener('load', async function() {
+    const params = new URLSearchParams(window.location.search);
+    const termo = params.get("pesquisa");
+    let palavras = [];
+    if(termo){
+        const resposta = await fetch('http://localhost:5000/limpar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ texto: termo })
+        });
+
+        const dados = await resposta.json();
+        palavras = dados.palavras;
+    }
+
     
-    let dados = await listar();
-    trocarBotoes()
+    let dados = await listar(palavras);
+    gerenciarBotoes()
     getCarregar(dados[0].produtos_loja)
     const form = document.getElementById('encerrarSessao');
     if(form){

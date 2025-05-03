@@ -19,26 +19,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     form.addEventListener('submit', async function (event) {
         event.preventDefault(); // Evita o envio padrão do formulário
-        
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-
-        if (!isValidEmail(email)) {
-            event.preventDefault(); // Bloqueia o envio do formulário
-            alert('Email inválido');
-            return;
+        try{
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+    
+            if (!isValidEmail(email)) {
+                event.preventDefault(); // Bloqueia o envio do formulário
+                alert('Email inválido');
+                return;
+            }
+    
+            const [userData, message] = await login(email, password);
+            if(userData == false){
+                event.preventDefault();
+                alert(message);
+            }
+            else{
+                sessionStorage.setItem('token', userData.token); 
+                form.submit();
+            }
         }
-
-        const [userData, message] = await login(email, password);
-        if(userData == false){
+        catch (error){
             event.preventDefault();
-            alert(message);
+            alert("Algo deu errado, tente novamente" + error)
         }
-        else{
-            sessionStorage.setItem('token', userData.token); 
-
-            form.submit();
-        }
+        
     });
 });
 

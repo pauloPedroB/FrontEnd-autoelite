@@ -155,6 +155,14 @@ border: none;
     border: var(--secondaryV1-color);
     margin-bottom: 30px;
 }
+.container-top a{
+  background-color: var(--secondaryV1-color);
+  padding: 5px 20px 5px 20px;
+  color: var(--whiteV1-color);
+  border-radius: 2px;
+  border: var(--secondaryV1-color);
+  margin-bottom: 30px;
+}
 /* #endregion */
   
 /* #region BottomPag*/
@@ -185,6 +193,10 @@ border: none;
   padding: 16px 30px 10px 30px;
   text-align: center;
   border-radius: 8px;
+}
+
+.card-not-linked img{
+width: 150px;
 }
 
 .card-not-linked button{
