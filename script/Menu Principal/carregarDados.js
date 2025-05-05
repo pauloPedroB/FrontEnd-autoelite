@@ -59,7 +59,10 @@ const gerenciarBotoes = function(){
         elemento2.remove();
     }
     else{
-        
+        const itens = document.querySelectorAll('.decoration-text-token');
+        for (let i = 0; i < itens.length; i++) {
+            itens[i].remove();
+        }
         const elemento = document.getElementById('encerrarSessao');
         elemento.remove();
     }
