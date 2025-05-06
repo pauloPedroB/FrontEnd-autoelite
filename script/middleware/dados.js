@@ -24,7 +24,6 @@ export async function buscarDados() {
             if(cliente){
                 return cliente;
             }
-            console.log("teste1")
             return null;
         }
         else{
@@ -60,7 +59,7 @@ export async function buscarDados() {
             if (response.status !== 200) {
                 return [null, mensagem];
             }
-            //sessionStorage.setItem('token_dados', respostaJson.token_dados); 
+            sessionStorage.setItem('token_dados', respostaJson.token_dados); 
 
             const dados = jwt_decode(respostaJson.token_dados);
             const agora = Math.floor(Date.now() / 1000);
