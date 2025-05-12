@@ -1,8 +1,12 @@
 import { buscarUsuario } from '../middleware/auth.js';
 const API_URL = "http://localhost:3001/produtos/";
+import { buscarDados } from '../middleware/dados.js';
+
 
 
 window.addEventListener('load', async function() {
+  const dados = await buscarDados()
+
   const params = new URLSearchParams(window.location.search);
 
   const usuario = buscarUsuario()
@@ -42,6 +46,8 @@ window.addEventListener('load', async function() {
   }
 // Aqui você pode fazer algo com os dados recebidos, se necessário
 });
+
+
 
 async function listar(nomes = [], categoria = null){
   const dadosUsuario = {
@@ -94,11 +100,30 @@ const getCarregar = function(produtos){
 
       h2_caixa_produto.innerText = produto.nome_produto;
       if(usuario.typeUser == 2){
+        const formulario = document.createElement('form');
+        formulario.id = 'formulario';
+        const botaoID = document.createElement('input');
+        botaoID.type = 'text';
+        botaoID.value = produto.id_produto;
+        botaoID.name = "id";
 
-        let button = document.createElement('button')
 
-        div_caixa_produto.appendChild(button)
-        button.innerText = "vincular";
+        botaoID.style.display = 'none';
+        const botaoEnviar = document.createElement('input');
+        botaoEnviar.type = 'submit';
+        botaoEnviar.value = 'vincular';
+
+        
+        
+        div_caixa_produto.appendChild(formulario)
+        formulario.appendChild(botaoID)
+
+        formulario.appendChild(botaoEnviar)
+        formulario.addEventListener("submit", function(e) {
+          e.preventDefault();
+          const result = adicionarProduto(botaoID.value)
+        });
+
       }
       else if(usuario.typeUser == 1){
         let button1 = document.createElement('button')
@@ -112,7 +137,24 @@ const getCarregar = function(produtos){
       }
 
   }
+}
+const adicionarProduto = async function(id){
+  const token = sessionStorage.getItem('token');
+  const token_dados = sessionStorage.getItem('token_dados');
 
+  const resposta = await fetch('http://localhost:3001/produtos_loja/criar/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              "authorization": "Bearer "+token,
+              "token_dados": token_dados
+          },
+          body: JSON.stringify({ id_produto: id })
+        });
+        const respostaJson = await resposta.json();
+  
+        const mensagem = respostaJson.message;
+        alert(mensagem)
 }
 
 

@@ -64,7 +64,6 @@ const getCarregar = function(produtos){
       let div_caixa_produto = document.createElement('div')
       let h2_caixa_produto = document.createElement('h3')
       let img = document.createElement('img')
-      let button = document.createElement('button')
 
       div_caixa_produto.setAttribute('class', 'card-linked')
 
@@ -75,13 +74,56 @@ const getCarregar = function(produtos){
       div_produtos.appendChild(div_caixa_produto)
       div_caixa_produto.appendChild(h2_caixa_produto)
       div_caixa_produto.appendChild(img)
-      div_caixa_produto.appendChild(button)
+      const formulario = document.createElement('form');
+      formulario.id = 'formulario';
+      const botaoID = document.createElement('input');
+      botaoID.type = 'text';
+      botaoID.value = produto.id_produto_loja;
+      botaoID.name = "id";
+
+
+      botaoID.style.display = 'none';
+      const botaoEnviar = document.createElement('input');
+      botaoEnviar.type = 'submit';
+      botaoEnviar.value = 'Desvincular';
+
+      
+      
+      div_caixa_produto.appendChild(formulario)
+      formulario.appendChild(botaoID)
+
+      formulario.appendChild(botaoEnviar)
+      formulario.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const mensagem = await excluirProduto(botaoID.value);
+        alert(mensagem)
+        window.location.reload();
+
+      });
 
       h2_caixa_produto.innerText = produto.produto.nome_produto;
-      button.innerText = "desvincular";
 
   }
 
+}
+
+const excluirProduto = async function(id){
+  const token = sessionStorage.getItem('token');
+  const token_dados = sessionStorage.getItem('token_dados');
+
+  const resposta = await fetch('http://localhost:3001/produtos_loja/excluir/', {
+          method: 'DELETE',
+          headers: {
+              'Content-Type': 'application/json',
+              "authorization": "Bearer "+token,
+              "token_dados": token_dados
+          },
+          body: JSON.stringify({ id_produto_loja: id })
+        });
+        const respostaJson = await resposta.json();
+  
+        const mensagem = respostaJson.message;
+        return mensagem
 }
 
 
