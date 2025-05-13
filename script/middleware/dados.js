@@ -3,6 +3,8 @@ import { buscarUsuario } from '../middleware/auth.js';
 export async function buscarDados() {
     
     const token_dados = sessionStorage.getItem('token_dados');
+    const usuario = buscarUsuario()
+
     try{
         if (token_dados){
             const dados = jwt_decode(token_dados);
@@ -26,8 +28,7 @@ export async function buscarDados() {
             }
             return null;
         }
-        else{
-            const usuario = buscarUsuario()
+        else if (usuario.typeUser !=1){
             if(usuario == null){
                 return null
             }
@@ -72,7 +73,9 @@ export async function buscarDados() {
             }
 
             return dados;
-
+        }
+        else{
+            return null;
         }
     }
     catch (error){

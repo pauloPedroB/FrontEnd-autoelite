@@ -126,35 +126,60 @@ const getCarregar = function(produtos){
 
       }
       else if(usuario.typeUser == 1){
-        let button1 = document.createElement('button')
-        div_caixa_produto.appendChild(button1)
-        button1.innerText = "Editar";
 
-        let button2 = document.createElement('button')
-        div_caixa_produto.appendChild(button2)
-        button2.innerText = "Excluir";
+        const formulario = document.createElement('form');
+        formulario.id = 'formulario';
+        const botaoID = document.createElement('input');
+        botaoID.type = 'text';
+        botaoID.value = produto.id_produto;
+        botaoID.name = "id";
+
+        botaoID.style.display = 'none';
+        const botaoExcluir = document.createElement('input');
+        botaoExcluir.type = 'submit';
+        botaoExcluir.value = 'Excluir';
+
+        const link = document.createElement('a')
+        link.href = "/view/cadastroProduto.html?produto="+produto.id_produto
+        link.innerText = "Editar";
+        
+        div_caixa_produto.appendChild(formulario)
+        formulario.appendChild(link)
+
+        formulario.appendChild(botaoID)
+
+
+        formulario.appendChild(botaoExcluir)
+        formulario.addEventListener("submit", async function(e) {
+          e.preventDefault();
+          const result = await excluirProdutos(botaoID.value)
+          alert(result)
+
+          window.location.reload();
+
+        });
+
+       
 
       }
 
   }
 }
-const adicionarProduto = async function(id){
+const excluirProdutos = async function(id){
   const token = sessionStorage.getItem('token');
-  const token_dados = sessionStorage.getItem('token_dados');
 
-  const resposta = await fetch('http://localhost:3001/produtos_loja/criar/', {
-          method: 'POST',
+  const resposta = await fetch('http://localhost:3001/produtos/excluir/', {
+          method: 'DELETE',
           headers: {
               'Content-Type': 'application/json',
               "authorization": "Bearer "+token,
-              "token_dados": token_dados
           },
           body: JSON.stringify({ id_produto: id })
         });
         const respostaJson = await resposta.json();
   
         const mensagem = respostaJson.message;
-        alert(mensagem)
+        return mensagem
 }
 
 
