@@ -23,7 +23,7 @@ window.addEventListener('load', async function() {
                     });
 
             const produto = await resposta.json();
-            console.log(produto)
+            getCarregar(produto)
         }
         
     }
@@ -35,51 +35,12 @@ window.addEventListener('load', async function() {
 
 });
 
-const getCarregar = function(produtos){
-    
-    
-    let div_produtos = document.getElementById("imgs-top")
+const getCarregar = function(produto){
+    let nome = document.getElementById("Nome")
+    nome.value = produto.produto.nome_produto
+    let categoria = document.getElementById("Categoria")
+    categoria.value = produto.produto.categoria
 
-    for (const produto_loja of produtos){
-        let div_caixa_produto = document.createElement('div')
-        let h2_caixa_produto = document.createElement('h3')
-        let img = document.createElement('img')
-        let link = document.createElement('a')
-        let distancia = document.createElement('p')
-        let div_estrelas = document.createElement('div')
-
-        
-
-        div_caixa_produto.setAttribute('class', 'opcao')
-        div_estrelas.setAttribute('class', 'estrelas')
-        div_estrelas.setAttribute('src', produto_loja.produto.img)
-
-        img.setAttribute('src', produto_loja.produto.img)
-        img.setAttribute('alt', produto_loja.produto.nome_produto)
-        img.setAttribute('title', produto_loja.produto.nome_produto)
-        link.setAttribute('href', `/view/productNotRegister.html?id_produto_loja=${produto_loja.produto.id_produto}`);
-
-        div_estrelas.innerHTML = `
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star-half-stroke"></i>
-            <i class="fa-regular fa-star"></i>
-        `;
-
-        div_produtos.appendChild(div_caixa_produto)
-        div_caixa_produto.appendChild(link)
-        link.appendChild(h2_caixa_produto)
-        link.appendChild(img)
-        link.appendChild(distancia)
-        link.appendChild(div_estrelas)
-
-
-
-        distancia.innerText = 'Distancia: '+produto_loja.distancia + 'KM';
-        h2_caixa_produto.innerText = produto_loja.produto.nome_produto.substring(0, 30)+"...";
-
-    }
 
 }
 
