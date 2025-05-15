@@ -90,7 +90,12 @@ const getCarregar = function(produtos){
         img.setAttribute('src', produto_loja.produto.img)
         img.setAttribute('alt', produto_loja.produto.nome_produto)
         img.setAttribute('title', produto_loja.produto.nome_produto)
-        link.setAttribute('href', `/view/productNotRegister.html?id_produto_loja=${produto_loja.produto.id_produto}`);
+        if(token){
+            link.setAttribute('href', `/view/productViewClient.html?id_produto_loja=${produto_loja.id_produto_loja}`);
+        }
+        else{
+            link.setAttribute('href', `/view/productNotRegister.html?id_produto_loja=${produto_loja.produto.id_produto}`);
+        }
 
         div_estrelas.innerHTML = `
             <i class="fa-solid fa-star"></i>

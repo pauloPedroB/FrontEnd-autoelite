@@ -119,9 +119,10 @@ const getCarregar = function(produtos){
         formulario.appendChild(botaoID)
 
         formulario.appendChild(botaoEnviar)
-        formulario.addEventListener("submit", function(e) {
+        formulario.addEventListener("submit", async function(e) {
           e.preventDefault();
-          const result = adicionarProduto(botaoID.value)
+          const result = await adicionarProduto(botaoID.value)
+          alert(result)
         });
 
       }
@@ -164,6 +165,25 @@ const getCarregar = function(produtos){
       }
 
   }
+}
+const adicionarProduto = async function(id){
+  const token = sessionStorage.getItem('token');
+  const token_dados = sessionStorage.getItem('token_dados');
+
+
+  const resposta = await fetch('http://localhost:3001/produtos_loja/criar/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              "authorization": "Bearer "+token,
+              "token_dados": token_dados
+          },
+          body: JSON.stringify({ id_produto: id })
+        });
+        const respostaJson = await resposta.json();
+  
+        const mensagem = respostaJson.message;
+        return mensagem
 }
 const excluirProdutos = async function(id){
   const token = sessionStorage.getItem('token');

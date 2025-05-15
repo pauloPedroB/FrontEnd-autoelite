@@ -25,7 +25,7 @@
         </div>
         
         <div class="teste">
-            <form>
+            <form id="form">
                 <h2>Cadastro de Produto</h2>
 
                 <label> <p>Nome do Produto:</p> <input type="text" name="nome" id="Nome"/></label>
@@ -33,6 +33,11 @@
                 <label> <p>Categoria:</p> <input type="text" name="categoria" id="Categoria"/></label>
         
                 <label> <p>Selecione uma imagem:</p> <input type="file" accept="image/*" id="SelectIMG"/></label>
+
+                <div id="preview-container" style="display: none;">
+                    <p style="color: white;">Prévia da Imagem:</p>
+                    <img id="preview" src="" alt="Prévia" width="150">
+                </div>
         
                 <button>Cadastrar Produto</button>
         

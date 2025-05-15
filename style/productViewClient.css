@@ -235,6 +235,18 @@ margin-bottom: 30px;
 
 }
 
+.box-imgs{
+  display: flex;
+}
+
+.box-imgs img{
+  width: 250px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
 .container-bottom{
 display: flex;
 flex-direction: column;
