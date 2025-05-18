@@ -1,4 +1,8 @@
 /* #region  Variaveis*/
+@font-face {
+    font-family: Quicksand;
+    src: url(/fonts/Quicksand/Quicksand-VariableFont_wght.ttf);
+}
 :root {
     --primaryV1-color: #090C08;
     --primaryV2-color: #2E352C;
@@ -12,10 +16,7 @@
     --whiteV1-color: #FFFFFF;
     --whiteV2-color: #E2E2E2;
     --whiteV3-color: #BFBFBF;
-    --font-size-h1: 32px;
-    --font-size-h2: 26px;
-    --font-size-p: 16px;
-    --font-family: Arial, Helvetica, sans-serif;
+    --font-family: Quicksand;
   }
 /* #endregion */
 
@@ -24,6 +25,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--font-family);
 }
 
 .content-center{
@@ -49,7 +51,7 @@
   justify-content: center;
   align-items: center;
   list-style: none;
-  gap: 20px;
+  gap: 1px;
 }
 
 .sidebar li{
@@ -68,6 +70,7 @@
   border-radius: 4px;
   padding: 8px;
   border: 10px;
+  text-decoration: none;
 }
 
 .decoration-text{
@@ -81,6 +84,34 @@
 .decoration-text-perfil{
   text-decoration: none;
   color: var(--whiteV1-color);
+}
+
+.encerrarSessaoButton {
+    display: inline-block;
+    background-color: var(--primaryV3-color);
+    color: var(--whiteV1-color);
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-family);
+    font-size: var(--font-size-p);
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-width: 100px;
+    text-align: center;
+}
+
+.encerrarSessaoButton:hover {
+    background-color: var(--secondaryV2-color);
+    color: var(--whiteV1-color);
+}
+
+#encerrarSessao {
+    margin: 0;
+    padding: 0;
+    display: inline;
 }
 /* #endregion */
 
@@ -210,29 +241,64 @@ footer {
   gap: 5px;
   }
 
-  .box-input-product{
-    display: flex;
-    width: 100%;
-    background-color: var(--primaryV1-color);
-    padding: 6px 5px 6px 15px;
-    border-radius: 5px;
+.box-input-product {
+    width: 100%;       /* Faz o box ocupar toda a largura do seu container pai */
+    max-width: none;   /* Remove qualquer limite de largura máxima anterior */
+    margin-top: 20px;  /* Mantém margens verticais se desejar */
     margin-bottom: 20px;
-    }
-    
-    .box-input-product input{
-    width: 100%;
+    margin-left: 0;    /* Remove margens laterais automáticas */
+    margin-right: 0;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
     background-color: var(--primaryV1-color);
-    border: #090C08;
-    color: var(--whiteV1-color);
-    }
-    
-    .box-input-product input::placeholder{
-    color: white;
-    }
-    
-    .box-input-product input:focus {
-    outline: none;
+    /* Se quiser cantos retos para largura total, mude para: border-radius: 0; */
+    border-radius: 25px;
+    padding: 5px 10px 5px 15px;
+    border: 1px solid var(--primaryV1-color); /* Ou border: none; se preferir sem borda externa */
+    /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */ /* Pode remover a sombra se for full-width */
+    overflow: hidden;
+    width: 100%;       /* Garante que o formulário ocupe toda a largura do .box-input-product */
+}
+
+.search-input {
     border: none;
-    }
+    outline: none;
+    padding: 10px 5px;
+    font-size: var(--font-size-p);
+    flex-grow: 1;
+    background-color: transparent;
+    color: var(--whiteV1-color);
+    min-width: 0;
+}
+
+.search-input::placeholder {
+    color: var(--whiteV2-color);
+    opacity: 1;
+}
+
+.search-button {
+    background-color: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--whiteV1-color);
+    margin-left: 5px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button i {
+    font-size: 1.3em;
+    display: block;
+}
+
+.search-button:hover i {
+    color: var(--tertiaryV2-color);
+}
 
 /* #endregion */

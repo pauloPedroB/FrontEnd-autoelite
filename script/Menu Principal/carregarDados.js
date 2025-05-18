@@ -141,6 +141,7 @@ window.addEventListener('load', async function() {
     
     let dados = await listar(palavras);
     gerenciarBotoes()
+    console.log(dados[0].produtos_loja)
     getCarregar(dados[0].produtos_loja)
     const form = document.getElementById('encerrarSessao');
     if(form){

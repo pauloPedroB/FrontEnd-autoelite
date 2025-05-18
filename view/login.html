@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/login.css">
     <script src="/script/login/login.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="/style/login.css" title="text/css">
+    <title>Login</title>
 </head>
 <body>
-    <form action="/view/home.html">
-        <h2>Login Elite</h2>
-        <label> <p>E-mail:</p> <input type="text" id="email" required/></label>
-
-        <label> <p>Senha:</p> 
-            <div style="position: relative; width: 100%;">
-                <input type="password" id="password" required />
-                <span id="togglePassword" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;">👁️</span>
+    <main>
+        <section id="formulario">
+            <form action="/view/home.html">
+                <h1>Login Elite</h1>
+                <label class="email-label" for="email">
+                    <p>Email:</p>
+                    <input type="email" id="email" name="email">
+                </label>
+                <label class="password-label" for="password">
+                    <p>Senha:</p>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password">
+                        <span id="togglePassword">👁️</span>
+                    </div>
+                </label>
+                <div class="entrar-box">
+                    <button class="entrar-button" type="submit" value="Entrar">Entrar</button>
+                </div>
+                
+            </form>
+            <div class="box-extra">
+                <p><a href="#">Esqueci a senha</a></p>
+                <p></p><a href="cadastro.html">Não tem login? Cadastre-se!</a></p>
             </div>
-        </label>
-
-        <input type="submit" value="Entrar">
-
-        <div class="google-login">
-            <a class="teste" href="#">Entrar com Google</a>
-            <img src="/AutoElite_FrotEnd-main/AutoElite_FrotEnd-main/img/googleLogo.png" class="ftgoogle" alt="">
-        </div>
-        
-        <a href="#">Esqueci a senha</a>
-        <a href="#">Não tem login? Cadastre-se!</a>
-
-    </form>
+        </section>
+    </main>
 </body>
 </html>
