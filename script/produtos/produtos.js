@@ -19,6 +19,11 @@ window.addEventListener('load', async function() {
         const elemento = document.getElementById('myProducts');
         elemento.remove();
       }
+      else{
+        
+        const elemento = document.getElementById('cadastrarProdutos');
+        elemento.remove();
+      }
       let palavras = []
       if(termo){
         const resposta = await fetch('http://localhost:5000/limpar', {

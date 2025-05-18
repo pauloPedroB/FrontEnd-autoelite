@@ -113,8 +113,9 @@ const getCarregar = function(produtos){
         link.appendChild(div_estrelas)
 
 
-
-        distancia.innerText = 'Distancia: '+produto_loja.distancia + 'KM';
+        if(token){
+            distancia.innerText = 'Distancia: '+produto_loja.distancia + 'KM';
+        }
         h2_caixa_produto.innerText = produto_loja.produto.nome_produto.substring(0, 30)+"...";
 
     }
