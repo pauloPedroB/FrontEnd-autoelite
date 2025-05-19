@@ -16,12 +16,18 @@ window.addEventListener('load', async function() {
   
     if (usuario) {
         let dado = await buscar();
+        const [produtos, message] = await listar();
+        console.log(produtos)
+        getCarregarProdutos(produtos)
+
         getCarregar(dado[0])
     }
+    
+
   });
 
 
-async function buscar(nomes = [], categoria = null) {
+async function buscar() {
     
     const dadosUsuario = {
         id_produto_loja: idProduto
@@ -38,7 +44,6 @@ async function buscar(nomes = [], categoria = null) {
             body: JSON.stringify(dadosUsuario),
         });
         const respostaJson = await response.json();
-        console.log(respostaJson)
 
         const mensagem = respostaJson.message;
 
@@ -52,6 +57,27 @@ async function buscar(nomes = [], categoria = null) {
         return [null, "Erro na requisição"];
     }
 }
+const getCarregarProdutos = async function(produtos){
+    let div = document.getElementById("container-bottom content-center")
+    
+    for(const produto of produtos){
+        let div_caixa_produto = document.createElement('a')
+        let titulo = document.createElement('p')
+        let img = document.createElement('img')
+
+        div_caixa_produto.setAttribute('class', 'box-produt')
+        div_caixa_produto.setAttribute('href', `/view/productViewClient.html?id_produto_loja=${produto.id_produto_loja}`);
+        
+        titulo.innerText = produto.produto.nome_produto.slice(0,20)+"..."
+        img.src = produto.produto.img
+        div.appendChild(div_caixa_produto)
+        div_caixa_produto.appendChild(titulo)
+        div_caixa_produto.appendChild(img)
+    }
+    
+
+}
+
 const getCarregar = async function(produto){
     let div_imagens = document.getElementById("box-imgs")
     let titulo = document.getElementById("title-product-main")
@@ -111,8 +137,9 @@ const getCarregar = async function(produto){
     let iframe = document.getElementById("mapa")
     let encaminhar = document.getElementById("encaminhar")
     if(usuario){
+        const dados = await buscarDados()
+
         const endereco = await buscarEndereco()
-        console.log(endereco)
 
         encaminhar.href = "https://www.google.com/maps/dir/"+endereco.rua+",+"+endereco.nmr+",+"+endereco.cidade+",+"+endereco.uf+",+"+endereco.cep+"/"+produto.produto_loja.endereco.rua+",+"+produto.produto_loja.endereco.nmr+",+"+produto.produto_loja.endereco.cidade+",+"+produto.produto_loja.endereco.uf+",+"+produto.produto_loja.endereco.cep
         
@@ -121,5 +148,33 @@ const getCarregar = async function(produto){
     iframe.src = "https://www.google.com/maps?q="+produto.produto_loja.endereco.rua+",+"+produto.produto_loja.endereco.nmr+",+"+produto.produto_loja.endereco.cidade+",+"+produto.produto_loja.endereco.uf+",+"+produto.produto_loja.endereco.cep+"&output=embed"
 
     distancia.innerText = parseFloat(produto.distancia).toFixed(2) + " km"
-
 }
+
+async function listar(nomes = [], categoria = null){
+    const dadosUsuario = {
+      nomes: nomes,
+      categoria: categoria,
+  };
+    try{
+      const token = sessionStorage.getItem('token');
+      const response = await fetch(API_URL + "listar/", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "authorization": "Bearer "+token
+          },
+          body: JSON.stringify(dadosUsuario),
+      });
+      const respostaJson = await response.json();
+    
+      const mensagem = respostaJson.message;
+    
+      if (response.status !== 200) {
+          return [null, mensagem];
+      }
+      return [respostaJson.produtos_loja, mensagem];
+    }
+    catch (error){
+      return [null, "Erro na requisição"];
+    } 
+}  

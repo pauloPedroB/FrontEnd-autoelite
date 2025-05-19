@@ -5,9 +5,8 @@ export async function buscarEndereco() {
     const usuario = buscarUsuario()
     const dados = buscarDados()
     const token = sessionStorage.getItem('token');
-
     const token_dados = sessionStorage.getItem('token_dados');
-
+    
     let API_URL = "http://localhost:3001/enderecos/";
     if(usuario && dados){
         const response = await fetch(API_URL + "id_user/", {
@@ -21,6 +20,7 @@ export async function buscarEndereco() {
         const respostaJson = await response.json();
         const mensagem = respostaJson.message;
         if (response.status !== 200) {
+            console.log(mensagem)
             return null;
         }
         const dados = jwt_decode(respostaJson.token_endereco);
