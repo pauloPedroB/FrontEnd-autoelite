@@ -31,8 +31,9 @@ async function listar(nomes = [], categoria = null) {
             });
             
         }
-        
         const respostaJson = await response.json();
+        console.log(respostaJson)
+
 
         const mensagem = respostaJson.message;
 

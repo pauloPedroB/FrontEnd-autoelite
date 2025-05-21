@@ -111,6 +111,11 @@ height: 10vw;
   color: var(--whiteV1-color);
 }
 
+.card-linked img{
+  width: 10vw;
+  height: 10vw;
+}
+
 #formulario a{
   background-color: #151EC4;
   color: var(--whiteV1-color);

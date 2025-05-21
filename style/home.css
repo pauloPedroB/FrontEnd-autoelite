@@ -46,32 +46,54 @@
 /* #endregion */
 
 /* #region CenterPag */
-.container-center{
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-  }
-  
-  .container-center img{
-  width: 18vw;
-  height: auto;
-  }
-  
-  .imgs-bottom{
-  display: flex;
-  gap: 40px;
+  .imgs-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-top: 30px;
+
   }
 
-  .imgs-top {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 40px;
-    margin-top: 60px;
+
+  .opcao{
+    background-color: var(--whiteV1-color);
+    border: 1px solid var(--secondaryV1-color);
+    border-radius: 1px;
+    box-shadow: 0px 5px 4px 1px rgb(0 0 0 / 50%);
+    width: 20vw;
+    height: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    text-decoration: none;
   }
-  .imgs-top img{
-    height: 200px;
+
+  .opcao h3{
+    text-decoration: none;
+    color: var(--primaryV1-color);
+    height: 5vw;
+    text-align: center;
+    padding-top: 10px;
   }
+
+  .opcao a{
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    font-size: 1em;
+  }
+
+  .opcao img{
+    width: 15vw;
+    height: 15vw;
+    margin-bottom: 10px;
+  }
+
   
 /* #endregion */
 
@@ -102,4 +124,41 @@
   flex-direction: column;
   gap: 5px;
   }
+/* #endregion */
+
+/* #region Chatbot Button */
+#chatbot-button {
+    /* 1. Fixo na tela (mesmo com rolagem) */
+    position: fixed;
+
+    /* 3. Canto inferior direito */
+    bottom: 20px;    /* Distância da parte inferior */
+    right: 20px;     /* Distância da parte direita */
+
+    background-color: var(--secondaryV1-color);
+    color: var(--whiteV1-color);
+    border: none;
+
+    /* 2. Formato circular */
+    border-radius: 50%; /* Para fazer o botão redondo */
+    width: 60px;        /* Largura do botão */
+    height: 60px;       /* Altura do botão (igual à largura para um círculo perfeito) */
+
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Garante que fique sobre outros elementos */
+    transition: background-color 0.3s ease;
+}
+
+#chatbot-button:hover {
+    background-color: var(--secondaryV2-color);
+}
+
+#chatbot-button i {
+    pointer-events: none;
+}
 /* #endregion */
