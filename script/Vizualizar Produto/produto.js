@@ -69,4 +69,58 @@ const getCarregar = function(produto){
 window.addEventListener('load', async function() {
     let dado = await buscar();
     getCarregar(dado[0].produto)
+    const [produtos, message] = await listar();
+    getCarregarProdutos(produtos)
   });
+
+const getCarregarProdutos = async function(produtos){
+    let div = document.getElementById("containertop")
+
+    for(const produto of produtos){
+        let div_caixa_produto = document.createElement('a')
+        let titulo = document.createElement('p')
+        let img = document.createElement('img')
+
+        div_caixa_produto.setAttribute('class', 'box-produt')
+        div_caixa_produto.setAttribute('href', `/view/productViewClient.html?id_produto_loja=${produto.id_produto_loja}`);
+        
+        titulo.innerText = produto.produto.nome_produto.slice(0,20)+"..."
+        img.src = produto.produto.img
+        div.appendChild(div_caixa_produto)
+        div_caixa_produto.appendChild(titulo)
+        div_caixa_produto.appendChild(img)
+    }
+
+}
+
+
+
+async function listar(nomes = [], categoria = null){
+    const dadosUsuario = {
+        nomes: nomes,
+        categoria: categoria,
+    };
+    try{
+      const token = sessionStorage.getItem('token');
+        const API_URL2 = "http://localhost:3001/produtos_loja/";
+
+      const response = await fetch(API_URL2 + "listar/", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dadosUsuario),
+      });
+      const respostaJson = await response.json();
+    
+      const mensagem = respostaJson.message;
+    
+      if (response.status !== 200) {
+          return [null, mensagem];
+      }
+      return [respostaJson.produtos_loja, mensagem];
+    }
+    catch (error){
+      return [null, "Erro na requisição"];
+    } 
+}  

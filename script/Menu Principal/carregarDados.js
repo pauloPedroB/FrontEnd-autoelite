@@ -1,3 +1,5 @@
+import { buscarUsuario } from '../middleware/auth.js';
+
 const API_URL = "http://localhost:3001/produtos_loja/";
 const token = sessionStorage.getItem('token');
 
@@ -12,6 +14,7 @@ async function listar(nomes = [], categoria = null) {
     try {
         let response = undefined;
         if(token){
+            
             response = await fetch(API_URL + "listar/", {
                 method: "POST",
                 headers: {
@@ -127,6 +130,12 @@ window.addEventListener('load', async function() {
     const params = new URLSearchParams(window.location.search);
     const termo = params.get("pesquisa");
     let palavras = [];
+    if(token){
+        const usuario = buscarUsuario()
+        if(usuario.typeUser == null){
+            window.location.href = "/view/storeOrClient.html";
+        }
+    }
     if(termo){
         const resposta = await fetch('http://localhost:5000/limpar', {
             method: 'POST',

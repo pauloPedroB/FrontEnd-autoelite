@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/style/storeOrClient.css">
     <link rel="stylesheet" type="text/css" href="/style/default.css">
     <script src="/script/index.js"></script>
+    <script src="/script/login/storeOrClient.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
 </head>
 <body>
     <header>
@@ -16,7 +18,7 @@
                 <li><a class="decoration-text" href="/view/about.html">Sobre a Auto Elite</a></li>
                 <li><a class="decoration-text" href="/view/contact.html">Contato</a></li>
                 <li><a class="decoration-text" href="/view/usageInformation.html">Como funcionamos</a></li>
-                <li><button class="elite-button">SEJA ELITE</button></li>
+                <li><form id="encerrarSessao"><input class="encerrarSessaoButton" type="submit" value="Sair"></form></li>
             </ul>
         </div>
     </header>
@@ -31,13 +33,13 @@
                     <h3>Um cliente Elite</h3>
                     <p>Pesquise por produtos ou serviços automotivos e descubra as lojas mais próximas que atendem às suas necessidades.</p>
                     <p>Tenha acesso às 10 principais lojas premium que se destacam em nossas buscas, garantindo qualidade e confiança.</p>
-                    <button>Seja um Cliente ELITE</button>
+                    <a href="cadastroCliente.html">Seja um Cliente ELITE</a>
                 </div>
                 <div class="store card">
                     <h3>Uma Loja Elite</h3>
                     <p>Ample sua visibilidade online e alcance mais clientes cadastrando sua loja em nossa plataforma.</p>
                     <p>Torne-se uma<strong class="store-premium"> Loja Premium:</strong> Invista em destaque nas buscas e aumente suas oportunidades de negócio tornando-se uma loja premium.</p>
-                    <button>Seja uma Loja ELITE</button>
+                    <a href="cadastroLoja.html">Seja uma Loja ELITE</a>
                 </div>
             </div>
         </section>

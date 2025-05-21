@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/cadastro.css">
     <link rel="stylesheet" type="text/css" href="/style/default.css">
+    <script src="/script/login/cadastro.js"></script>
     <title>Cadastra-se</title>
 </head>
 <body>
@@ -12,9 +13,21 @@
         <h2>Cadastro Elite</h2>
         <label> <p>E-mail:</p> <input type="text" id="email"/></label>
 
-        <label> <p>Senha:</p> <input type="password" id="password"/></label>
+        <label> 
+            <p>Senha:</p> 
+            <div class="password-input-wrapper">
+                <input type="password" id="password" name="password">
+                <span id="togglePassword1">👁️</span>
+            </div>
+        </label>
 
-        <label> <p>Confirmação de Senha:</p> <input type="password" id="confirm_password" class="p3"/></label>
+        
+        <label> <p>Confirmação de Senha:</p>
+            <div class="password-input-wrapper">
+                <input type="password" id="confirm-password" name="confirm-password" class="p3">
+                <span id="togglePassword2">👁️</span>
+            </div>
+        </label>
 
 
         <button>Cadastrar</button>

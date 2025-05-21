@@ -68,7 +68,7 @@
   border-radius: 4px;
   padding: 8px;
   border: 10px;
-  text-decoration: ;
+  text-decoration: none;
 }
 
 .decoration-text{
@@ -163,11 +163,13 @@ footer {
     justify-items: center;
   }
   
-.client button{
+.client a{
   background-color: var(--primaryV1-color);
   color: var(--whiteV1-color);
   padding: 7px 5px 7px 5px;
   border-radius: 2px;
+  text-decoration: none;
+
 }
 
 .store {
@@ -178,11 +180,13 @@ footer {
     padding: 15px 10px 10px 30px;
   }
 
-.store button{
+.store a{
   background-color: var(--secondaryV1-color);
   color: var(--whiteV1-color);
   padding: 7px 5px 7px 5px;
   border-radius: 2px;
+  text-decoration: none;
+
 }
 
 .store-premium {
