@@ -4,30 +4,27 @@ body{
     font-family: sans-serif;
     display: grid;
     place-items: center;
-    overflow: hidden;
 }
 
 h2{
     font-size: 2.0rem;
     font-weight: 700;
     color: rgb(255, 255, 255);
-    margin-bottom: 2rem;
-    margin-top: 0.1rem;
+    margin-bottom: 1vh;
 }
 
 form{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 30px 50px;
     width: 100%;
-    height: 80%;
-    max-width: 28rem;
+    height: 100%;
+    width: 30vw;
     background-color: #C4151C;
-    padding: 4rem;
     border-radius: 0.6rem;
     border:5px solid white;
     box-shadow: 7px 9px 1px #000;
-
 }
 
 label{
@@ -109,26 +106,4 @@ a:focus{
 
 a:first-of-type{
     margin-top: 1rem;
-}
-
-a + a{
-    margin-top: 1.125rem;
-}
-
-
-.google-login {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* espaço entre a imagem e o texto */
-    margin-top: 10px;
-}
-
-.google-login img {
-    width: 20px; /* ou ajuste conforme o tamanho ideal */
-    height: 20px;
-    display: block;
-}
-
-.teste{
-    margin-bottom: 14px;
 }

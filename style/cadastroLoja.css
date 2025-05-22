@@ -4,7 +4,6 @@ body{
     font-family: sans-serif;
     display: grid;
     place-items: center;
-    overflow: hidden;
 }
 
 h2{
@@ -19,10 +18,9 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    max-width: 28rem;
+    width: 30vw;
     background-color: #090C08;
-    padding: 4rem;
+    padding: 20px 50px;
     border-radius: 0.6rem;
     border:5px solid #EECE5A;
     box-shadow: 7px 9px 1px #000;
@@ -108,26 +106,4 @@ a:focus{
 
 a:first-of-type{
     margin-top: 1rem;
-}
-
-a + a{
-    margin-top: 1.125rem;
-}
-
-
-.google-login {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* espaço entre a imagem e o texto */
-    margin-top: 10px;
-}
-
-.google-login img {
-    width: 20px; /* ou ajuste conforme o tamanho ideal */
-    height: 20px;
-    display: block;
-}
-
-.teste{
-    margin-bottom: 14px;
 }
