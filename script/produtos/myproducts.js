@@ -4,7 +4,7 @@ import { buscarDados } from '../middleware/dados.js';
 
 
 window.addEventListener('load', async function() {
-  const usuario = buscarUsuario()
+  const usuario = await buscarUsuario()
   
   if (usuario) {
     if(usuario.typeUser == 2){

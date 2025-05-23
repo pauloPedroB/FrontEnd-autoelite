@@ -2,8 +2,8 @@ import { buscarUsuario } from '../middleware/auth.js';
 import { buscarDados } from './dados.js';
 
 export async function buscarEndereco() {
-    const usuario = buscarUsuario()
-    const dados = buscarDados()
+    const usuario = await buscarUsuario()
+    const dados = await buscarDados()
     const token = sessionStorage.getItem('token');
     const token_dados = sessionStorage.getItem('token_dados');
     

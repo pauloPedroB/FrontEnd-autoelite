@@ -22,7 +22,7 @@ window.addEventListener('load', async function() {
     const formulario = document.getElementById('form');
     const token = sessionStorage.getItem('token');
 
-    const usuario = buscarUsuario()
+    const usuario = await buscarUsuario()
     
     const params = new URLSearchParams(window.location.search);
     const produtoUrl = params.get("produto");

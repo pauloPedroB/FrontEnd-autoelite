@@ -9,7 +9,7 @@ const token = sessionStorage.getItem('token');
 const API_URL = "http://localhost:3001/produtos_loja/";
 const urlParams = new URLSearchParams(window.location.search);
 const idProduto = urlParams.get('id_produto_loja');
-const usuario = buscarUsuario()
+const usuario = await buscarUsuario()
 
 
 window.addEventListener('load', async function() {

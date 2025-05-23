@@ -6,23 +6,26 @@
     <link rel="stylesheet" href="/style/cadastroLoja.css">
     <link rel="stylesheet" type="text/css" href="/style/default.css">
     <title>Document</title>
+    <script src="/script/login/cadastroLoja.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+
 </head>
 <body>
-    <form>
+    <form href="cadastroEndereco.html">
         <h2>Cadastro Loja Elite</h2>
-        <label> <p>CNPJ:</p> <input type="number" id="email" placeholder="CNPJ: (APENAS NÚMEROS!)"></input> </label>
+        <label> <p>CNPJ:</p> <input type="number" id="cnpj" placeholder="CNPJ: (APENAS NÚMEROS!)"></input> </label>
 
         <label> <p>Nome Fantasia:</p> <input type="text" id="Nome"/></label>
 
-        <label> <p>Razão Social:</p> <input type="number" id="Telefone"/></label>
+        <label> <p>Razão Social:</p> <input type="text" id="razao"/></label>
 
         <label> <p>Telefone:</p> <input type="text" id="Telefone"/></label>
 
         <label> <p>Celular:</p> <input type="text" id="Celular"/></label>
 
-        <label> <p>Abertura:</p> <input type="text" id="Abertura" placeholder="dd/mm/aaaa"/></label>
+        <label> <p>Abertura:</p> <input type="date" id="Abertura" placeholder="dd/mm/aaaa"/></label>
 
-        <button>Enviar</button>
+        <input type="submit" value="Enviar">
 
     </form>
 </body>

@@ -9,7 +9,7 @@ window.addEventListener('load', async function() {
 
   const params = new URLSearchParams(window.location.search);
 
-  const usuario = buscarUsuario()
+  const usuario = await buscarUsuario()
   const termo = params.get("pesquisa");
   
   if (usuario) {
@@ -83,10 +83,10 @@ async function listar(nomes = [], categoria = null){
   } 
 }
 
-const getCarregar = function(produtos){
+const getCarregar = async function(produtos){
 
   let div_produtos = document.getElementById("cards-not-linked")
-  const usuario = buscarUsuario()
+  const usuario = await buscarUsuario()
 
   for (const produto of produtos){
       let div_caixa_produto = document.createElement('div')

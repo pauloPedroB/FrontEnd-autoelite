@@ -37,7 +37,6 @@ async function listar(nomes = [], categoria = null) {
         const respostaJson = await response.json();
         console.log(respostaJson)
 
-
         const mensagem = respostaJson.message;
 
         if (response.status !== 200) {
@@ -131,7 +130,7 @@ window.addEventListener('load', async function() {
     const termo = params.get("pesquisa");
     let palavras = [];
     if(token){
-        const usuario = buscarUsuario()
+        const usuario = await buscarUsuario()
         if(usuario.typeUser == null){
             window.location.href = "/view/storeOrClient.html";
         }

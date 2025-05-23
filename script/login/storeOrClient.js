@@ -7,7 +7,9 @@ const token = sessionStorage.getItem('token');
 
 window.addEventListener('load', async function() {
     if(token){
-        const usuario = buscarUsuario()
+        const  usuario = await buscarUsuario()
+        console.log(usuario)
+
         if(usuario.typeUser != null){
             window.location.href = "/view/home.html";
         }

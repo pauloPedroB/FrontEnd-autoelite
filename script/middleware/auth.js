@@ -1,10 +1,11 @@
 const API_URL = "http://localhost:3001/usuarios/";
 
-export function buscarUsuario() {
+export async function  buscarUsuario() {
     
     const token = sessionStorage.getItem('token');
     try{
-        if (token){
+        if (token) {
+            console.log(typeof(token))
             const dados = jwt_decode(token);
             const agora = Math.floor(Date.now() / 1000);
         
@@ -20,29 +21,41 @@ export function buscarUsuario() {
                 window.location.href = "/view/verificEmail.html";
                 return null;
             }
+            sessionStorage.setItem('user_id', usuario.id_usuario);
+
+            
             return usuario;
         }
         else{
-            alert("Faça Login para acessar o sistema")
-            window.location.href = "/view/login.html";
-            return null;
-            //response = await fetch(API_URL + "buscarPorEmail/", {
-            //    method: "POST",
-            //    headers: {
-            //        "Content-Type": "application/json",
-            //    },
-            //    body: JSON.stringify(dadosUsuario),
-            //});
+            const id_usuario = sessionStorage.getItem('user_id');
 
-            //const respostaJson = await response.json();
+            const dadosUsuario = {
+                id_user: id_usuario,
+            };
+            try {
+                const response = await fetch(API_URL + "buscarPorEmail/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(dadosUsuario),
+                });
+                const respostaJson = await response.json();
 
-            //const mensagem = respostaJson.message;
+                const mensagem = respostaJson.message;
+            
+                if (response.status !== 200) {
+                    return [false, mensagem];
+                }
+                sessionStorage.setItem('token', respostaJson.token); 
 
-            //if (response.status !== 200) {
-            //    alert("Usuário não encontrado")
-            //    window.location.href = "/view/login.html";
-            //    return null, mensagem
-            //}
+                return [respostaJson, mensagem];
+
+            } 
+            catch (error) {
+                console.error("Erro na requisição:", error);
+                return [null, "Erro na requisição"];
+            }
 
         }
     }
