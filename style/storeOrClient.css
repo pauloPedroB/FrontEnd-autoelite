@@ -19,20 +19,6 @@
   }
 /* #endregion */
 
-/* #region ConfPag*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.content-center{
-  padding-left: 15vw;
-  padding-right: 15vw;
-}
-
-/* #endregion */
-
 /* #region Sidebar*/
 .sidebar {
   width: 100%;
@@ -86,7 +72,6 @@ footer {
   color: var(--whiteV1-color);
   justify-content: center;
   gap: 150px;
-  margin-top: 70px;
 }
 
 .footer-align{
@@ -121,6 +106,7 @@ footer {
     height: 500px;
     padding-left: 22vw;
     padding-right: 22vw;
+    padding-bottom: 38vw;
 }
 
 .text-top{
