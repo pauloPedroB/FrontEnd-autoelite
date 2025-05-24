@@ -28,7 +28,7 @@ export async function buscarDados() {
             }
             return null;
         }
-        else if (usuario.typeUser !=1){
+        else if (usuario.typeUser !=1 && usuario.typeUser != null){
             if(usuario == null){
                 return null
             }
