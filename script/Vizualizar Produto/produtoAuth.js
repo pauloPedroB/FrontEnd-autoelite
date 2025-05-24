@@ -12,9 +12,15 @@ const idProduto = urlParams.get('id_produto_loja');
 const usuario = await buscarUsuario()
 
 
+
 window.addEventListener('load', async function() {
   
     if (usuario) {
+        const endereco = await buscarEndereco()
+        if(!endereco){
+            window.location.href = "/view/cadastroEndereco.html";
+        }
+
         let dado = await buscar();
         const [produtos, message] = await listar();
         console.log(produtos)
@@ -140,6 +146,7 @@ const getCarregar = async function(produto){
         const dados = await buscarDados()
 
         const endereco = await buscarEndereco()
+        
 
         encaminhar.href = "https://www.google.com/maps/dir/"+endereco.rua+",+"+endereco.nmr+",+"+endereco.cidade+",+"+endereco.uf+",+"+endereco.cep+"/"+produto.produto_loja.endereco.rua+",+"+produto.produto_loja.endereco.nmr+",+"+produto.produto_loja.endereco.cidade+",+"+produto.produto_loja.endereco.uf+",+"+produto.produto_loja.endereco.cep
         
