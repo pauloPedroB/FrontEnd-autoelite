@@ -14,7 +14,7 @@ window.addEventListener('load', async function() {
             window.location.href = "/view/storeOrClient.html";
         }
         const endereco = await buscarEndereco()
-        if(endereco != null){
+        if(endereco != null || usuario.typeUser == 1){
             window.location.href = "/view/home.html";
         }
         
