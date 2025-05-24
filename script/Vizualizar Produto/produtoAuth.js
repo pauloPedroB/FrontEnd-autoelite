@@ -17,7 +17,7 @@ window.addEventListener('load', async function() {
   
     if (usuario) {
         const endereco = await buscarEndereco()
-        if(!endereco && usuario.typeUser ==1){
+        if(!endereco && usuario.typeUser !=1){
             window.location.href = "/view/cadastroEndereco.html";
         }
 
