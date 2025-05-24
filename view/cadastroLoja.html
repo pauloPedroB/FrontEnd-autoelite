@@ -29,4 +29,49 @@
 
     </form>
 </body>
+<script>
+    const cnpjInput = document.getElementById("cnpj");
+    
+    cnpjInput.addEventListener('blur', function() {
+        const cnpj = cnpjInput.value.replace(/[^\d]+-./g, '');
+          // Remove caracteres não numéricos
+    
+        if (cnpj.length === 14) { // Verifica se é um CNPJ válido
+            const URL_BASE = `http://localhost:5000/consultar_cnpj?cnpj=${cnpj}`;
+            
+            fetch(URL_BASE)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Resposta do backend:", data); // Log para visualizar a resposta do backend
+                    
+                    if (data && data.status === "OK") { // Confirma que o status é "OK"
+                        const razao = document.getElementById("razao");
+                        const nome = document.getElementById("Nome");
+                        const telefone = document.getElementById("Telefone");
+                        const celular = document.getElementById("Celular");
+                        const abertura = document.getElementById("Abertura");
+
+    
+                        // Preenche os campos do formulário com os dados retornados
+                        razao.value = data.nome || ''; // Nome da empresa
+                        nome.value = data.fantasia || ''; // Nome fantasia
+                        telefone.value = data.telefone || ''; // Telefone
+                        celular.value = data.telefone || '';  // Ajuste conforme necessário
+                        if (data.abertura) {
+                        const [day, month, year] = data.abertura.split('/');
+                        abertura.value = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+                    }
+
+                    } else {
+                        console.error("Erro: Dados não encontrados ou status inválido");
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao consultar o CNPJ:', error);
+                });
+        } else {
+            console.error('CNPJ inválido ou incompleto');
+        }
+    });
+</script>
 </html>

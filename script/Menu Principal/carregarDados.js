@@ -1,4 +1,6 @@
 import { buscarUsuario } from '../middleware/auth.js';
+import { buscarEndereco } from '../middleware/endereco.js';
+
 
 const API_URL = "http://localhost:3001/produtos_loja/";
 const token = sessionStorage.getItem('token');
@@ -134,6 +136,12 @@ window.addEventListener('load', async function() {
         if(usuario.typeUser == null){
             window.location.href = "/view/storeOrClient.html";
         }
+        const endereco = await buscarEndereco()
+        if(endereco == null){
+            window.location.href = "/view/cadastroEndereco.html";
+        }
+
+        
     }
     if(termo){
         const resposta = await fetch('http://localhost:5000/limpar', {

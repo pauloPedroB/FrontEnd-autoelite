@@ -2,7 +2,9 @@ from flask import Flask, request, jsonify
 import string
 from flask_cors import CORS
 import nltk
+import requests
 from nltk.corpus import stopwords,wordnet
+import re
 
 nltk.download('stopwords')
 nltk.download("omw-1.4")
@@ -44,6 +46,20 @@ def limpar():
     palavras_final = list(dict.fromkeys(palavras_final))
  
     return jsonify({'palavras': palavras_final})
+
+@app.route('/consultar_cnpj', methods=['GET'])
+def consultar_cnpj():
+    cnpj = request.args.get('cnpj')
+    if cnpj:
+        numeros = re.findall(r'\d', cnpj)  # Encontra todos os dígitos
+        cnpj = "".join(numeros)
+        url = f'https://www.receitaws.com.br/v1/cnpj/{cnpj}'
+        response = requests.get(url)
+        if response.status_code == 200:
+            return jsonify(response.json())
+        else:
+            return jsonify({'error': 'CNPJ não encontrado'}), 404
+    return jsonify({'error': 'CNPJ inválido'}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)

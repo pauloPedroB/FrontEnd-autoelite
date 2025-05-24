@@ -40,13 +40,14 @@ export async function  buscarUsuario() {
                     },
                     body: JSON.stringify(dadosUsuario),
                 });
+                if (response.status !== 200) {
+                    return [false, mensagem];
+                }
                 const respostaJson = await response.json();
 
                 const mensagem = respostaJson.message;
             
-                if (response.status !== 200) {
-                    return [false, mensagem];
-                }
+                
                 sessionStorage.setItem('token', respostaJson.token); 
 
                 return [respostaJson, mensagem];

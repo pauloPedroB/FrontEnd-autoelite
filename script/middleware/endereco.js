@@ -17,12 +17,12 @@ export async function buscarEndereco() {
             "token_dados": token_dados
         },
         });
-        const respostaJson = await response.json();
-        const mensagem = respostaJson.message;
         if (response.status !== 200) {
-            console.log(mensagem)
             return null;
         }
+        const respostaJson = await response.json();
+        const mensagem = respostaJson.message;
+        
         const dados = jwt_decode(respostaJson.token_endereco);
         const agora = Math.floor(Date.now() / 1000);
     

@@ -5,27 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/cadastroEndereco.css">
     <link rel="stylesheet" type="text/css" href="/style/default.css">
+    <script src="/script/login/cadastroEndereco.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <title>Cadastro Endereço</title>
 </head>
 <body>
-    <form>
+    <form action="home.html">
         <h2>Cadastro de Endereço</h2>
-        <label> <p>CEP:</p> <input type="number" id="email" placeholder="CEP: (APENAS NÚMEROS!)"></input> </label>
+        <label> <p>CEP:</p> <input type="number" id="CEP" placeholder="CEP: (APENAS NÚMEROS!)" required></input> </label>
 
-        <label> <p>Rua:</p> <input type="text" id="Rua"/></label>
+        <label> <p>Rua:</p> <input type="text" id="Rua" required/></label>
 
-        <label> <p>Número:</p> <input type="number" id="Numero"/></label>
+        <label> <p>Número:</p> <input type="number" id="Numero" required/></label>
 
         <label> <p>Complemento:</p> <input type="text" id="Complemento"/></label>
 
-        <label> <p>Bairro:</p> <input type="text" id="Bairro"/></label>
+        <label> <p>Bairro:</p> <input type="text" id="Bairro" required/></label>
 
-        <label> <p>Cidade:</p> <input type="text" id="Cidade"/></label>
+        <label> <p>Cidade:</p> <input type="text" id="Cidade" required/></label>
 
-        <label> <p>UF:</p> <input type="text" id="UF"/></label>
+        <label> <p>UF:</p> <input type="text" id="UF" required/></label>
 
         <button>Enviar</button>
 
     </form>
 </body>
+<script>
+    // Aguardar o DOM carregar completamente antes de adicionar o evento
+    document.addEventListener('DOMContentLoaded', function() {
+        // Selecionando o campo de CEP
+        var cepInput = document.getElementById('CEP');
+        if (cepInput) {
+            // Adicionar o evento de blur no campo CEP para chamar a função
+            cepInput.addEventListener('blur', buscarEnderecoPorCEP);
+        }
+    });
+
+    // Função para buscar o endereço ao digitar o CEP
+    function buscarEnderecoPorCEP() {
+        var cep = document.getElementById('CEP').value.replace(/\D/g, ''); // Retirar caracteres não numéricos
+
+        // Verifica se o CEP tem 8 dígitos
+        if (cep.length === 8) {
+            var url = `https://viacep.com.br/ws/${cep}/json/`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.erro) {
+                        alert("CEP não encontrado!");
+                        return;
+                    }
+
+                    // Preenchendo os campos com os dados do endereço
+                    document.getElementById('Rua').value = data.logradouro;
+                    document.getElementById('Bairro').value = data.bairro;
+                    document.getElementById('Cidade').value = data.localidade;
+                    var ufSelect = document.getElementById('UF').value = data.uf;
+
+                })
+                .catch(error => {
+                    console.log("Erro ao buscar o endereço. Tente novamente." + error);
+                });
+        } else {
+            // Limpa os campos caso o CEP tenha formato incorreto
+            document.getElementById('Rua').value = '';
+            document.getElementById('Bairro').value = '';
+            document.getElementById('Cidade').value = '';
+            document.getElementById('UF').value = '';
+        }
+    }
+</script>
 </html>

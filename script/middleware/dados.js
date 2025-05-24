@@ -54,12 +54,13 @@ export async function buscarDados() {
             },
             body: JSON.stringify(dadosUsuario),
             });
+            if (response.status !== 200) {
+                return null;
+            }
             const respostaJson = await response.json();
             const mensagem = respostaJson.message;
 
-            if (response.status !== 200) {
-                return [null, mensagem];
-            }
+            
             sessionStorage.setItem('token_dados', respostaJson.token_dados);
 
             const dados = jwt_decode(respostaJson.token_dados);
