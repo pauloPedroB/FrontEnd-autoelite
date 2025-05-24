@@ -43,9 +43,8 @@ form.addEventListener('submit', async function (event) {
 
         
         const [userData, message] = await cadastro(cep, rua, bairro, cidade, uf, nmr, complemento);
-        alert(message)
+        console.log(userData)
         if(userData == false){
-            event.preventDefault();
             alert(message);
         }
         else{
@@ -77,8 +76,6 @@ async function cadastro(cep, rua, bairro, cidade, uf, nmr, complemento = null) {
                 "Content-Type": "application/json",
                 "authorization": "Bearer "+token,
                 "token_dados": token_dados
-
-
             },
             body: JSON.stringify(dadosUsuario),
         });
